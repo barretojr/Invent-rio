@@ -1,18 +1,25 @@
-async function connect(){
-    if(global.connection && global.connection.state !== 'disconnected'){
-        return global.connection;
-    }
-    const mysql = require("mysql2/promise");
-    const connection = await mysql.createConnection({    
-        host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'test',
+const mysql = require('mysql2/promise');
+
+async function connect() {
+  if (global.connection && global.connection.state !== 'disconnected') {
+    return global.connection;
+  }
+  try {
+    const connection = await mysql.createPool({        
+        host: 'bdsj.mysql.uhserver.com',        
+        user: 'gruposj',
+        password: '@lemanha1982',
+        database: 'bdsj',
         multipleStatements: true
     });
     global.connection = connection;
     return connection;
+  } catch (error) {
+        console.error(error);
+        throw new Error('Não foi possível conectar ao banco de dados.');
+  }
 }
+
 connect();
 
 // async function showInventario(){
@@ -36,4 +43,4 @@ connect();
 // }
 
 
-// module.exports = {showInventario, editInventario, cadInventario}
+// module.exports = {showInventario}

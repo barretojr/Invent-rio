@@ -1,5 +1,5 @@
 const express = require('express');
-var db = require ('./public/js/db')
+var db = require ('./public/js/db.js')
 const app = express();
 const port = 8080;
 
@@ -16,14 +16,19 @@ app.listen(port, () => {
 app.use(express.static(__dirname + '/public'));
 
 
-app.get('/listar',(req,res)=>{
-    db.query('SELECT * FROM Inventario',[],function(erro,listagem){
-        if (erro){
-            res.status(200).send(erro);
+app.get('/listar', async (req, res) => {
+    try {                
+        const listagem = await db.query('SELECT * FROM Inventario', []);
+        if (listagem.length === 0) {
+            res.render('lista_vazia');
+        } else {
+            res.render('lista', { lista: listagem });
         }
-        res.render('lista',{lista : listagem})
-    });
-})
+    } catch (erro) {
+      console.error(erro);
+      res.status(500).send('Ocorreu um erro ao listar o inventário.');
+    }
+  });
 
 
 app.get('/add', (req, res) => {
