@@ -1,0 +1,2 @@
+# Inventario
+## Como instalar

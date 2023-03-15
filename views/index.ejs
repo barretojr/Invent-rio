@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Inventário</title>
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>        
+        <nav class="navbar bg-body-secondary">
+            <div class="container">
+                <a href="" class="navbar-brand">
+                    <img src="imgs/logo.png" alt="Logo Sâo Judas" width="200" />
+                </a>
+                <ul class="nav justify-content-center">
+                    <li class="nav-item">
+                        <a
+                            href="./"
+                            class="nav-link active link-success"
+                            aria-current="page"
+                            >Home</a
+                        >
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link link-success">Inventário</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <section class="container">
+            <h1 class="display-2 text-center">Inventário</h1>
+            <p class="lead text-center">Cadastro de equipamento</p>
+            <form class="row g-3 needs-validation" method="post" action="/add" novalidate>
+                <div class="row g-4 align-items-center mb-3">
+                    <div
+                        class="col-12 text-center row mt-4 justify-content-center"
+                    >
+                        <label
+                            for="input-unidade"
+                            id="inputUnidade"
+                            class="col-form-label"
+                            >Unidade</label
+                        >
+                        <div class="col-6">
+                            <select
+                                name="input-unidade"
+                                id="input-unidade"
+                                class="form-select"
+                                
+            
+                            >
+                                <option selected>Selecione a unidade</option>
+                                <option value="Piancó">Piancó</option>
+                                <option value="Orfanato">Orfanato</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="input-patrimonio" class="form-label"
+                        >Patrimônio</label
+                    >
+                    <input
+                        type="number"
+                        name="input-patrimonio"
+                        id="input-patrimonio"
+                        class="form-control"
+                        placeholder="Patrimônio"
+                        
+    
+                    />
+                    <div class="invalid-feedback">
+                        Por favor, digite um valor
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="input-descricao" class="form-label"
+                        >Descrição</label
+                    >
+                    <input
+                        type="text"
+                        name="input-descricao"
+                        id="input-descricao"
+                        class="form-control"
+                        placeholder="Descrição"
+                        
+    
+                    />
+                    <div class="invalid-feedback">
+                        Por favor, digite um valor
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <label for="input-usuario" class="form-label"
+                        >Usuário</label
+                    >
+                    <input
+                        type="text"
+                        name="input-usuario"
+                        id="input-usuario"
+                        class="form-control"
+                        placeholder="Nome do usuário"
+                        
+    
+                    />
+                    <div class="invalid-feedback">
+                        Por favor, digite um valor
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <label for="input-modelo" class="form-label">Modelo</label>
+                    <input
+                        type="text"
+                        name="input-modelo"
+                        id="input-modelo"
+                        class="form-control"
+                        placeholder="Modelo do equipamento"
+                        
+    
+                    />
+                    <div class="invalid-feedback">
+                        Por favor, digite um valor
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="input-departamento" class="form-label"
+                        >Departamento</label
+                    >
+                    <input
+                        type="text"
+                        name="input-departamento"
+                        id="input-departamento"
+                        class="form-control"
+                        placeholder="Departamento"
+                        
+    
+                    />
+                    <div class="invalid-feedback">
+                        Por favor, digite um valor
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="input-valor-compra" class="form-label"
+                        >Valor da compra</label
+                    >
+                    <input
+                        type="number"
+                        name="input-valor-compra"
+                        id="input-valor-compra"
+                        class="form-control"
+                        placeholder="R$"
+                        
+    
+                    />
+                    <div class="invalid-feedback">
+                        Por favor, digite um valor
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="input-serie" class="form-label"
+                        >Nº de série</label
+                    >
+                    <input
+                        type="number"
+                        name="input-serie"
+                        id="input-serie"
+                        class="form-control"
+                        
+    
+                    />
+                    <div class="invalid-feedback">
+                        Por favor, digite um valor
+                    </div>
+                    <div class=""></div>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">
+                        Adicionar
+                    </button>
+                </div>
+            </form>
+        </section>
+        <section class="container-fluid mt-5">
+            <table class="table table-hover table-striped table-dark" id="table">
+                <thead>
+                    <th scope="col">Unidade</th>
+                    <th scope="col">Patrimônio</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Usuário</th>
+                    <th scope="col">Modelo</th>
+                    <th scope="col">Departamento</th>
+                    <th scope="col">Valor da Compra</th>
+                    <th scope="col">Nº de série</th>
+                    <th scope="col">Ações</th>
+                </thead>
+                <tbody class="table-group-divider">
+                    <tr>
+                        <th>034</th>
+                        <td>Higor Chagas</td>
+                        <td>Monitor Dell</td>
+                        <td>Dell AH421</td>
+                        <td>Contábil</td>
+                        <td>1200</td>
+                        <td>42587547489</td>
+                        <td>Piancó</td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">
+                                Editar
+                            </button>
+                            <button type="button" class="btn btn-sm btn-danger">Excluir</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <footer class="container-fluid mt-5 text-center">
+            <p class="lead fw-semibold mb-1">Copyright (c) 2023 Higor Chagas</p>
+            <a href="https://github.com/HigorChagas" target="_brank">
+                <i class="bi bi-github fs-3 text-dark"></i>
+            </a>
+        </footer>
+
+        <!-- Modal -->
+        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="editar-equipamento">Editar equipamento</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" class="row g-3 needs-validation" novalidate>
+                        <div class="row g-4 align-items-center mb-3">
+                            <div
+                                class="col-12 text-center row mt-4 justify-content-center"
+                            >
+                                <label
+                                    for="input-unidade"
+                                    id="inputUnidade"
+                                    class="col-form-label"
+                                    >Unidade</label
+                                >
+                                <div class="col-6">
+                                    <select
+                                        name="input-unidade"
+                                        id="input-unidade"
+                                        class="form-select"
+                                    >
+                                        <option selected>Selecione a unidade</option>
+                                        <option value="pianco">Piancó</option>
+                                        <option value="orfanato">Orfanato</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="input-patrimonio" class="form-label text-center"
+                                >Patrimônio</label
+                            >
+                            <input
+                                type="number"
+                                name="input-patrimonio"
+                                id="input-patrimonio"
+                                class="form-control"
+                                placeholder="Patrimônio"
+                                
+            
+                            />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="input-descricao" class="form-label"
+                                >Descrição</label
+                            >
+                            <input
+                                type="text"
+                                name="input-descricao"
+                                id="input-descricao"
+                                class="form-control"
+                                placeholder="Descrição"
+                                
+            
+                            />
+                        </div>
+                        <div class="col-md-12">
+                            <label for="input-usuario" class="form-label"
+                                >Usuário</label
+                            >
+                            <input
+                                type="text"
+                                name="input-usuario"
+                                id="input-usuario"
+                                class="form-control"
+                                placeholder="Nome do usuário"
+                                
+            
+                            />
+                        </div>
+                        <div class="col-md-12">
+                            <label for="input-modelo" class="form-label">Modelo</label>
+                            <input
+                                type="text"
+                                name="input-modelo"
+                                id="input-modelo"
+                                class="form-control"
+                                placeholder="Modelo do equipamento"
+                                
+            
+                            />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="input-departamento" class="form-label"
+                                >Departamento</label
+                            >
+                            <input
+                                type="text"
+                                name="input-departamento"
+                                id="input-departamento"
+                                class="form-control"
+                                placeholder="Departamento"
+                                
+            
+                            />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="input-valor-compra" class="form-label"
+                                >Valor da compra</label
+                            >
+                            <input
+                                type="number"
+                                name="input-valor-compra"
+                                id="input-valor-compra"
+                                class="form-control"
+                                placeholder="R$"
+                                
+            
+                            />
+                        </div>
+                        <div class="col-md-12">
+                            <label for="input-serie" class="form-label"
+                                >Nº de série</label
+                            >
+                            <input
+                                type="number"
+                                name="input-serie"
+                                id="input-serie"
+                                class="form-control"
+                                
+            
+                            />
+                            <div class=""></div>
+                        </div>
+                        <div class="col-12">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                  <button type="button" class="btn btn-primary">Editar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+
+        <script src="js/bootstrap.bundle.js"></script>
+        <script src="js/scripts.js"></script>
+        <script>
+            // Example starter JavaScript for disabling form submissions if there are invalid fields
+            (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+                })
+            })()
+        </script>
+    </body>
+</html>
