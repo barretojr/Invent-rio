@@ -183,8 +183,8 @@
         <section class="container-fluid mt-5">
             <table class="table table-hover table-striped table-dark" id="table">
                 <thead>
-                    <th scope="col">Unidade</th>
                     <th scope="col">Patrimônio</th>
+                    <th scope="col">Unidade</th>
                     <th scope="col">Descrição</th>
                     <th scope="col">Usuário</th>
                     <th scope="col">Modelo</th>
@@ -193,34 +193,32 @@
                     <th scope="col">Nº de série</th>
                     <th scope="col">Ações</th>
                 </thead>
-                <tbody class="table-group-divider">
-                    <tr>
-                        <th>034</th>
-                        <td>Higor Chagas</td>
-                        <td>Monitor Dell</td>
-                        <td>Dell AH421</td>
-                        <td>Contábil</td>
-                        <td>1200</td>
-                        <td>42587547489</td>
-                        <td>Piancó</td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">
-                                Editar
-                            </button>
-                            <button type="button" class="btn btn-sm btn-danger">Excluir</button>
-                        </td>
-                    </tr>
+                <tbody class="table-group-divider">                    
+                    <% for(item of lista){ %>
+                        <tr>
+                            <th><%= item.idpatrimonio %></th>
+                            <td><%= item.unidade %></td>
+                            <td><%= item.descricao %></td>
+                            <td><%= item.modelo %></td>
+                            <td><%= item.localizacao %></td>
+                            <td><%= item.valorestim %></td>
+                            <td><%= item.usuario %></td>
+                            <td><%= item.nserie %></td>                        
+                            <td>
+                                <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">
+                                    Editar
+                                </button>
+                                <button type="button" class="btn btn-sm btn-danger">Excluir</button>
+                            </td>
+                        </tr>
+                    <%}%>
                 </tbody>
             </table>
         </div>
         <footer class="container-fluid mt-5 text-center">
-            <p class="lead fw-semibold mb-1">Copyright (c) 2023 Higor Chagas</p>
-            <a href="https://github.com/HigorChagas" target="_brank">
-                <i class="bi bi-github fs-3 text-dark"></i>
-            </a>
+            
         </footer>
-
-        <!-- Modal -->
+        
         <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
