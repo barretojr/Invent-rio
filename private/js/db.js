@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 async function connect() {
     if (global.connection && global.connection.state !== 'disconnected') {
         console.log('aconteceu algum erro');
@@ -5,7 +7,7 @@ async function connect() {
     } else {
         const mysql = require('mysql2/promise');
         const connection = await mysql.createConnection(
-            'mysql://gruposj:Alemanha-1982@bdsj.mysql.uhserver.com/bdsj'
+            `mysql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_URL}/${process.env.DATABASE}`
         );
         return connection;
     }
@@ -19,4 +21,25 @@ async function showInventario() {
     return rows;
 }
 
-module.exports = { showInventario };
+async function cadInventario(invent){
+    const conn = await connect();
+    const sql = 'INSERT INTO Inventario (unidade, descricao, modelo, localizacao, valorestim, usuario, nserie) VALUES(?, ?, ?, ?, ?, ?, ?);';
+    const values =[invent.patrimonio, invent.unidade, invent.descricao, invent.modelo, invent.localizacao, invent.valorestim, invent.usuario, invent.nserie];
+    return await conn.query(sql, values);
+}
+
+async function editInventario(id, invent){
+    const conn = await connect();
+    const sql = 'UPDATE Inventario SET unidade=?, descricao=?, modelo=?, localizacao=?, valorestim=?, usuario=?, nserie=? WHERE patrimonio=?;    ';
+    const values =[id, invent.unidade, invent.descricao, invent.modelo, invent.localizacao, invent.valorestim, invent.usuario, invent.nserie];
+    return await conn.query(sql, values);
+}
+
+async function deleteInventario(id){
+    const conn = await connect();
+    const sql = 'DELETE FROM Inventario WHERE patrimonio=?;';
+    const values =[id]
+    return await conn.query(sql, values);
+}
+
+module.exports = { showInventario, cadInventario, editInventario, deleteInventario};

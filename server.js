@@ -2,7 +2,6 @@ const express = require('express');
 const db = require('./private/js/db');
 const app = express();
 const port = 8080;
-const router = express.Router();
 const bodyparser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
@@ -16,9 +15,7 @@ app.get('/', async (req, res) => {
     });
 });
 
-// app.get('/', (req, res) => {
-//     res.render('../views/home');
-// });
+
 
 app.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`);
@@ -31,6 +28,6 @@ app.get('/add', (req, res) => {
     res.render('../views/index');
 });
 
-app.post('/add', (req, res) => {
+app.post('/add', async (req, res) => {
     res.status(200).send('req.body');
 });
