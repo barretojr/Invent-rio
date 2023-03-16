@@ -194,9 +194,9 @@
                     <th scope="col">Ações</th>
                 </thead>
                 <tbody class="table-group-divider">                    
-                    <% for(item of lista){ %>
+                    <% for(item of lista) { %>
                         <tr>
-                            <th><%= item.idpatrimonio %></th>
+                            <th><%= item.patrimonio %></th>
                             <td><%= item.unidade %></td>
                             <td><%= item.descricao %></td>
                             <td><%= item.modelo %></td>
@@ -208,10 +208,10 @@
                                 <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">
                                     Editar
                                 </button>
-                                <button type="button" class="btn btn-sm btn-danger">Excluir</button>
+                                <a href='/delete/<%= item.id %>' class="btn btn-sm btn-danger">Excluir</a>
                             </td>
                         </tr>
-                    <%}%>
+                    <% } %>
                 </tbody>
             </table>
         </div>
@@ -351,7 +351,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                  <button type="button" class="btn btn-primary">Editar</button>
+                  <a href='/edit<% item.id %>' class="btn btn-primary">Editar</a>
                 </div>
               </div>
             </div>
@@ -360,7 +360,9 @@
 
         <script src="js/bootstrap.bundle.js"></script>
         <script src="js/scripts.js"></script>
+        <script src="/private/js/db.js"></script>
         <script>
+
             // Example starter JavaScript for disabling form submissions if there are invalid fields
             (function () {
             'use strict'
