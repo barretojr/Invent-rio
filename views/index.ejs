@@ -194,24 +194,23 @@
                     <th scope="col">Ações</th>
                 </thead>
                 <tbody class="table-group-divider">                    
-                    <% for(item of lista) { %>
+                    <% for(element of listagem) { %>
                         <tr>
-                            <th><%= item.patrimonio %></th>
-                            <td><%= item.unidade %></td>
-                            <td><%= item.descricao %></td>
-                            <td><%= item.modelo %></td>
-                            <td><%= item.localizacao %></td>
-                            <td><%= item.valorestim %></td>
-                            <td><%= item.usuario %></td>
-                            <td><%= item.nserie %></td>                        
-                            <td>
-                                <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">
-                                    Editar
-                                </button>
-                                <a href='/delete/<%= item.id %>' class="btn btn-sm btn-danger">Excluir</a>
-                            </td>
-                        </tr>
-                    <% } %>
+                            <th><%= element.patrimonio %></th>
+                            <th><%= element.unidade %></th>
+                            <th><%= element.descricao %></th>
+                            <th><%= element.usuario %></th>
+                            <th><%= element.modelo %></th>
+                            <th><%= element.localizacao %></th>
+                            <th><%= element.valorestim %></th>
+                            <th><%= element.nserie %></th>
+                            <th><button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">
+                                Editar
+                            </button>
+                            <a href='/delete/<% element.patrimonio %>' class="btn btn-sm btn-danger">Excluir</a>
+                            </th>
+                        </tr>                      
+                    <% }; %>
                 </tbody>
             </table>
         </div>
@@ -351,7 +350,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                  <a href='/edit<% item.id %>' class="btn btn-primary">Editar</a>
+                  <a href='#' class="btn btn-primary">Editar</a>
                 </div>
               </div>
             </div>
@@ -360,7 +359,6 @@
 
         <script src="js/bootstrap.bundle.js"></script>
         <script src="js/scripts.js"></script>
-        <script src="/private/js/db.js"></script>
         <script>
 
             // Example starter JavaScript for disabling form submissions if there are invalid fields
