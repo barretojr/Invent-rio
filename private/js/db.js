@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+
 async function connect() {
     if (global.connection && global.connection.state !== 'disconnected') {
         console.log('aconteceu algum erro');
@@ -42,4 +43,11 @@ async function deleteInventario(id){
     return await conn.query(sql, values);
 }
 
+
+
+
+
+
 module.exports = { showInventario, cadInventario, editInventario, deleteInventario};
+
+
