@@ -31,7 +31,7 @@ async function cadInventario(invent){
 async function editInventario(id, invent){
     const conn = await connect();
     const sql = 'UPDATE Inventario SET unidade=?, descricao=?, modelo=?, localizacao=?, valorestim=?, usuario=?, nserie=? WHERE patrimonio=?;    ';
-    const values =[id, invent.unidade, invent.descricao, invent.modelo, invent.localizacao, invent.valorestim, invent.usuario, invent.nserie];
+    const values =[invent.unidade, invent.descricao, invent.modelo, invent.localizacao, invent.valorestim, invent.usuario, invent.nserie, id];
     return await conn.query(sql, values);
 }
 
