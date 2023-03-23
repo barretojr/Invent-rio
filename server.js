@@ -59,6 +59,7 @@ app.get('/inventario/:id', async (req, res) => {
     //oi
     }
   });
+  //tudo bem
 
 app.post('/add', async (req, res) => {
         try {
