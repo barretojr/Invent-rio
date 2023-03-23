@@ -7,10 +7,11 @@ async function connect() {
         return global.connection;
     } else {
         const mysql = require('mysql2/promise');
-        const connection = await mysql.createConnection(
+        const connection = await mysql.createPool(
             `mysql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_URL}/${process.env.DATABASE}`
         );
         return connection;
+        //oi
     }
 }
 
@@ -44,10 +45,7 @@ async function deleteInventario(id){
 }
 
 
-
-
-
-
-module.exports = { showInventario, cadInventario, editInventario, deleteInventario};
+exports.connect = connect;
+module.exports = { connect, showInventario, cadInventario, editInventario, deleteInventario};
 
 
