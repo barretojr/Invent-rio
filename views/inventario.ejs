@@ -9,7 +9,7 @@
     <body>        
         <nav class="navbar bg-body-secondary">
             <div class="container">
-                <a href="" class="navbar-brand">
+                <a href="/" class="navbar-brand">
                     <img src="imgs/logo.png" alt="Logo Sâo Judas" width="200" />
                 </a>
                 <ul class="nav justify-content-center">
@@ -22,7 +22,7 @@
                         >
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link link-success">Inventário</a>
+                        <a href="/inventario" class="nav-link link-success">Inventário</a>
                     </li>
                 </ul>
             </div>
@@ -207,9 +207,9 @@
                             <th><button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">
                                 Editar
                             </button>
-                            <a href='/delete/<% element.patrimonio %>' class="btn btn-sm btn-danger">Excluir</a>
+                            <a href='/delete/<%= element.patrimonio %>' class="btn btn-sm btn-danger">Excluir</a>
                             </th>
-                        </tr>                      
+                        </tr>
                     <% }; %>
                 </tbody>
             </table>

@@ -5,7 +5,6 @@ const app = express();
 const port = 8080;
 const bodyparser = require('body-parser');
 const {body, validationResult} = require('express-validator');
-const { listarItem } = require('./private/js/db');
 
 //carregamento da engine ejs
 app.set('view engine', 'ejs');
@@ -38,20 +37,23 @@ app.use(express.static(__dirname + '/private'));
 //rotas das funções
 app.get('/inventario/:id', async (req, res) => {
     try {
-      const connection = await db.connect;
-      const [rows, fields] = await connection.execute(
+      const connection = await db.connect();
+      const [rows, listagem] = await connection.execute(
         'SELECT * FROM Inventario WHERE patrimonio=?;',
-        [req.params.id]
-      );
-      connect.release();
+        [req.params.id]       
+      );     
       if (rows.length === 0) {
         res.status(404).send({
             mensagem:'Item não encontrado'
         });
       } else {
-        res.status(200).json(rows[0]);
+        console.log(rows)
+        res.render('../views/inventario', {
+            listagem: listagem,
+        });
       }
     } catch (error) {
+        console.log(error);
       res.status(500).send({
         mensagem:'Ocorreu um erro ao listar o item',
         erro: req.params.id
