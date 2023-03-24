@@ -2,45 +2,39 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>404 - Page Not Found</title>
-  <style>
-    body {
-      background-color: #f1f1f1;
-      font-family: Arial, sans-serif;
-    }
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 50px;
-      text-align: center;
-    }
-    h1 {
-      font-size: 72px;
-      margin-bottom: 20px;
-    }
-    p {
-      font-size: 24px;
-      margin-bottom: 40px;
-    }
-    a {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #333;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 5px;
-      transition: all 0.2s ease-in-out;
-    }
-    a:hover {
-      background-color: #666;
-    }
-  </style>
+  <title>404 - Página não Encontrada</title>
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-  <div class="container">
-    <h1>404</h1>
-    <p>Page not found</p>
-    <a href="/">Return to homepage</a>
+  <nav class="navbar bg-body-secondary">
+    <div class="container">
+        <a href="" class="navbar-brand">
+            <img src="imgs/logo.png" alt="Logo Sâo Judas" width="200" />
+        </a>
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a
+                    href="./"
+                    class="nav-link active link-success"
+                    aria-current="page"
+                    >Home</a
+                >
+            </li>
+            <li class="nav-item">
+                <a href="" class="nav-link link-success">Inventário</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+  <div class="container-fluid mt-5 flex-column d-flex justify-content-center align-items-center">
+    <h1 class="display-1 fw-bold">404</h1>
+    <p class="display-5">Página não encontrada.</p>
+    <a href="/" class="btn btn-secondary">Página Inicial</a>
   </div>
+
+
+
+  <script src="js/bootstrap.bundle.js"></script>
+  <script src="js/scripts.js"></script>
 </body>
 </html>
