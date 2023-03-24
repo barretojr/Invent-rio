@@ -63,7 +63,7 @@ app.get('/inventario/:id', async (req, res) => {
 app.post('/add', async (req, res) => {
         try {
         const connection = await db.connect();
-        const [resultado, fields] = await connection.query(
+        await connection.query(
             'INSERT INTO Inventario (patrimonio, unidade, descricao, modelo, localizacao, valorestim, usuario, nserie) VALUES(?, ?, ?, ?, ?, ?, ?, ?);',
             [req.body.patrimonio, req.body.unidade, req.body.descricao, req.body.modelo, req.body.localizacao, req.body.valorestim, req.body.usuario, req.body.nserie]
         );
@@ -125,6 +125,37 @@ app.post("/user",[
     if(!errors.isEmpty()){
         return res.status(400).json( {errors: errors.array()} );
     }
-    res.json({msg: "sucesso"})
-})
+    res.json({msg: "sucesso"});
+});
+ 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//rota 404
+app.use((req, res) => {
+    res.status(404).sendFile(__dirname + '/views/404.html');
+  });
