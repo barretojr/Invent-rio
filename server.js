@@ -55,11 +55,10 @@ app.get('/inventario/:id', async (req, res) => {
       res.status(500).send({
         mensagem:'Ocorreu um erro ao listar o item',
         erro: req.params.id
-    });
-    //oi
+    });    
     }
   });
-  //tudo bem
+  
 
 app.post('/add', async (req, res) => {
         try {
@@ -95,7 +94,7 @@ app.post('/edit/:id', async(req, res) =>{
         console.log(error);
         res.status(500).send({
             mensagem:'Ocorreu um erro ao atualizar os dados'
-        });
+        });    
     }
 })
 
