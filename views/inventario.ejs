@@ -180,6 +180,28 @@
                 </div>
             </form>
         </section>
+        <form id="my-form" action="#" method="get">
+            <div class="form-group col-sm-6 d-flex">
+              <label for="input-dados">Digite seus dados:</label>
+              <input type="text" class="form-control" id="input-dados" name="dados">
+            </div>
+            < 
+            <a href="#" class="btn btn-primary" id="my-button">Enviar</a>
+          </form> 
+          <script>
+                const button = document.getElementById("my-button");
+                const form = document.getElementById("my-form");
+                const input = document.getElementById("input-dados"); 
+
+                button.addEventListener("click", (event) => {
+                    const dados = input.value;
+                    const url = `/${dados}`;  
+
+                    button.setAttribute("href", url);
+                    button.click();
+                });
+            </script>           
+                 
         <section class="container-fluid mt-5">
             <table class="table table-hover table-striped table-dark" id="table">
                 <thead>
@@ -204,10 +226,12 @@
                             <th><%= element.localizacao %></th>
                             <th><%= element.valorestim %></th>
                             <th><%= element.nserie %></th>
-                            <th><button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">
-                                Editar
-                            </button>
-                            <a href='/delete/<%= element.patrimonio %>' class="btn btn-sm btn-danger">Excluir</a>
+                            
+                                <th><a type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">
+                                    Editar
+                                </a>
+                                <a href='/delete/<%= element.patrimonio %>' class="deletar btn btn-sm btn-danger">Excluir</a>
+                            
                             </th>
                         </tr>
                     <% }; %>

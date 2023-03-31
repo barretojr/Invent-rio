@@ -5,6 +5,7 @@ const app = express();
 const port = 8080;
 const bodyparser = require('body-parser');
 const {body, validationResult} = require('express-validator');
+const {response} = require('express');
 
 //carregamento da engine ejs
 app.set('view engine', 'ejs');
@@ -34,22 +35,23 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/private'));
 
 
+
+
 //rotas das funções
-app.get('/inventario/:id', async (req, res) => {
-    try {
+app.get('/:id', async (req, res) => {  
+  try {
       const connection = await db.connect();
       const [rows, listagem] = await connection.execute(
         'SELECT * FROM Inventario WHERE patrimonio=?;',
-        [req.params.id]       
+        [req.params.id]      
       );     
       if (rows.length === 0) {
-        res.status(404).send({
-            mensagem:'Item não encontrado'
-        });
-      } else {
-        console.log(rows)
         res.render('../views/inventario', {
-            listagem: listagem,
+          listagem: rows,
+      });
+      } else {        
+        res.render('../views/inventario', {
+            listagem: rows,
         });
       }
     } catch (error) {
@@ -87,8 +89,7 @@ app.post('/edit/:id', async(req, res) =>{
         const [resultado, fields] = await connection.query(
             'UPDATE Inventario SET unidade=?, descricao=?, modelo=?, localizacao=?, valorestim=?, usuario=?, nserie=? WHERE patrimonio=?;',
             [req.body.unidade, req.body.descricao, req.body.modelo, req.body.localizacao, req.body.valorestim, req.body.usuario, req.body.nserie, req.params.id]
-        );
-        connect.release();
+        );                
         res.status(200).send({
             mensagem:'Dados atualizados com sucesso'
         });
@@ -100,14 +101,14 @@ app.post('/edit/:id', async(req, res) =>{
     }
 })
 
-app.delete('/delete/:id', async (req, res) => {
+  app.get('/delete/:id', async (req, res) => {
+    var idpatri = req.params.id;    
     try {
       const connection = await db.connect();
-      const [resultado, fields] = await connection.query(
+      await connection.query(
         'DELETE FROM Inventario WHERE patrimonio=?;',
-        [req.params.id]
-      );
-      connect.release();
+        idpatri
+      )
       res.status(200).send('Dados excluídos com sucesso');
     } catch (error) {
       console.log(error);
@@ -116,6 +117,7 @@ app.delete('/delete/:id', async (req, res) => {
   });
 
 //carregando bodyparser com json
+ 
 app.use(bodyparser.json());
 
 //validação
@@ -128,11 +130,14 @@ app.post("/user",[
         return res.status(400).json( {errors: errors.array()} );
     }
     res.json({msg: "sucesso"});
+    return response.json(request.body);
 });
  
 
 
-
+app.post("/admin/cadusuario", (req,res) => {
+    res.send("ta funcionando")
+});
 
 
 
