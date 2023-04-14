@@ -13,8 +13,6 @@ async function connect() {
     }
 }
 
-
-
 async function cadUsuario(id, value){
     const conn = await connect();
     const sql = '';

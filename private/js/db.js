@@ -40,7 +40,7 @@ async function editInventario(id, invent){
 async function deleteInventario(id){
     const conn = await connect();
     const sql = 'DELETE FROM Inventario WHERE patrimonio=?;';
-    const values =[id]
+    const values = [id];
     return await conn.query(sql, values);
 }
 

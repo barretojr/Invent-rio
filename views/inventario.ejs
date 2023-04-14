@@ -18,7 +18,7 @@
                             href="./"
                             class="nav-link active link-success"
                             aria-current="page"
-                            >Home</a
+                            >Home </a
                         >
                     </li>
                     <li class="nav-item">
@@ -91,18 +91,8 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <label for="input-usuario" class="form-label"
-                        >Usuário</label
-                    >
-                    <input
-                        type="text"
-                        name="input-usuario"
-                        id="input-usuario"
-                        class="form-control"
-                        placeholder="Nome do usuário"
-                        
-    
-                    />
+                    <label for="input-usuario" class="form-label">Usuário</label>
+                    <input type="text" name="input-usuario" id="input-usuario" class="form-control" placeholder="Nome do usuário"/>
                     <div class="invalid-feedback">
                         Por favor, digite um valor
                     </div>
@@ -115,8 +105,6 @@
                         id="input-modelo"
                         class="form-control"
                         placeholder="Modelo do equipamento"
-                        
-    
                     />
                     <div class="invalid-feedback">
                         Por favor, digite um valor
@@ -132,26 +120,14 @@
                         id="input-departamento"
                         class="form-control"
                         placeholder="Departamento"
-                        
-    
                     />
                     <div class="invalid-feedback">
                         Por favor, digite um valor
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <label for="input-valor-compra" class="form-label"
-                        >Valor da compra</label
-                    >
-                    <input
-                        type="number"
-                        name="input-valor-compra"
-                        id="input-valor-compra"
-                        class="form-control"
-                        placeholder="R$"
-                        
-    
-                    />
+                    <label for="input-valor-compra" class="form-label">Valor da compra</label>
+                    <input type="number" name="input-valor-compra" id="input-valor-compra" class="form-control" placeholder="R$"/>
                     <div class="invalid-feedback">
                         Por favor, digite um valor
                     </div>
@@ -165,8 +141,6 @@
                         name="input-serie"
                         id="input-serie"
                         class="form-control"
-                        
-    
                     />
                     <div class="invalid-feedback">
                         Por favor, digite um valor
@@ -184,9 +158,8 @@
             <div class="form-group col-sm-6 d-flex">
               <label for="input-dados">Digite seus dados:</label>
               <input type="text" class="form-control" id="input-dados" name="dados">
-            </div>
-            < 
-            <a href="#" class="btn btn-primary" id="my-button">Enviar</a>
+              <a href="#" class="btn btn-primary col-sm-1 id="my-button">Enviar</a>
+            </div> 
           </form> 
           <script>
                 const button = document.getElementById("my-button");
@@ -195,7 +168,7 @@
 
                 button.addEventListener("click", (event) => {
                     const dados = input.value;
-                    const url = `/${dados}`;  
+                    const url = `/inventario/${dados}`;  
 
                     button.setAttribute("href", url);
                     button.click();
@@ -225,8 +198,7 @@
                             <th><%= element.modelo %></th>
                             <th><%= element.localizacao %></th>
                             <th><%= element.valorestim %></th>
-                            <th><%= element.nserie %></th>
-                            
+                            <th><%= element.nserie %></th>                            
                                 <th><a type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">
                                     Editar
                                 </a>
@@ -238,8 +210,7 @@
                 </tbody>
             </table>
         </div>
-        <footer class="container-fluid mt-5 text-center">
-            
+        <footer class="container-fluid mt-5 text-center">            
         </footer>
         
         <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -262,11 +233,7 @@
                                     >Unidade</label
                                 >
                                 <div class="col-6">
-                                    <select
-                                        name="input-unidade"
-                                        id="input-unidade"
-                                        class="form-select"
-                                    >
+                                    <select name="input-unidade" id="input-unidade" class="form-select">
                                         <option selected>Selecione a unidade</option>
                                         <option value="pianco">Piancó</option>
                                         <option value="orfanato">Orfanato</option>

@@ -6,6 +6,7 @@ const port = 8080;
 const bodyparser = require('body-parser');
 const {body, validationResult} = require('express-validator');
 const {response} = require('express');
+const session = require('express-session');
 
 //carregamento da engine ejs
 app.set('view engine', 'ejs');
@@ -13,17 +14,19 @@ app.set('view engine', 'ejs');
 //implementação da verificação de login
 app.use(bodyparser.urlencoded({extended:true}));
 
-//inicio da aplicação com select no banco
-app.get('/', async (req, res) => {
+//render pagina inicial
+app.get("/", (req,res)=>{
+  res.render("../public/home");
+})
+
+//inicio select no banco
+app.get('/inventario/', async (req, res) => {
     const listagem = await db.showInventario();
     res.render('../views/inventario', {
         listagem: listagem,
     });
 });
 
-app.post('/',(req,res)=>{
-    res.render('inventario')
-});
 
 //rodando na porta
 app.listen(port, () => {
@@ -38,7 +41,8 @@ app.use(express.static(__dirname + '/private'));
 
 
 //rotas das funções
-app.get('/:id', async (req, res) => {  
+//localizar item
+app.get('/inventario/:id', async (req, res) => {  
   try {
       const connection = await db.connect();
       const [rows, listagem] = await connection.execute(
@@ -63,7 +67,7 @@ app.get('/:id', async (req, res) => {
     }
   });
   
-
+//adicionar item
 app.post('/add', async (req, res) => {
         try {
         const connection = await db.connect();
@@ -80,9 +84,11 @@ app.post('/add', async (req, res) => {
         res.status(500).send({
             mensagem:'Ocorreu um erro ao inserir os dados'
         });
+        res.send('<script> alert("Ocorreu um erro ao inserir os dados"); </script>');        
     }
 });
 
+//editar item
 app.post('/edit/:id', async(req, res) =>{
     try {
         const connection = await db.connect();
@@ -101,6 +107,8 @@ app.post('/edit/:id', async(req, res) =>{
     }
 })
 
+
+//deletar item
   app.get('/delete/:id', async (req, res) => {
     var idpatri = req.params.id;    
     try {
@@ -116,9 +124,18 @@ app.post('/edit/:id', async(req, res) =>{
     }
   });
 
-//carregando bodyparser com json
- 
+//carregando bodyparser com json 
 app.use(bodyparser.json());
+
+app.use(session({
+  secret: 'my-secret-key',
+  resave: false,
+  saveUninitialized: true
+}));
+
+app.get('/minha-rota', (req, res) => {
+  const sessionId = req.session.id; 
+});
 
 //validação
 app.post("/user",[
@@ -132,18 +149,10 @@ app.post("/user",[
     res.json({msg: "sucesso"});
     return response.json(request.body);
 });
- 
 
-
-app.post("/admin/cadusuario", (req,res) => {
-    res.send("ta funcionando")
-});
-
-
-
-
-
-
+app.get("/cadastro", (req, res)=>{
+  res.sendFile(__dirname + "/views/cadastro.html")
+})
 
 
 
