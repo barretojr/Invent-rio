@@ -7,17 +7,45 @@ const bodyparser = require('body-parser');
 const {body, validationResult} = require('express-validator');
 const {response} = require('express');
 const session = require('express-session');
+const bcrypt = require('bcrypt');
 
 //carregamento da engine ejs
 app.set('view engine', 'ejs');
 
 //implementação da verificação de login
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(bodyparser.urlencoded({extended:true}));
 
 //render pagina inicial
 app.get("/", (req,res)=>{
   res.render("../public/home");
 })
+//renderizar pagina de login
+app.get("/login", (req, res) =>{
+  res.render("../views/login");
+})
+//post de login
+app.post('/login', async (req, res) => {
+  const { email, senha } = req.body;
+  const user = await db.query('SELECT * FROM usuarios WHERE email = ?', [email]);
+
+  if (user.length === 0) {
+    return res.status(401).send('Email ou senha incorretos');
+  }
+
+  const senhaCorreta = await bcrypt.compare(senha, user[0].senha);
+
+  if (!senhaCorreta) {
+    return res.status(401).send('Email ou senha incorretos');
+  }
+  req.session.user = {
+    id: user[0].id,
+    nome: user[0].nome,
+    nomeUsuario: user[0].nomeUsuario
+  };
+  res.redirect('/dashboard');
+});
 
 //inicio select no banco
 app.get('/inventario/', async (req, res) => {
@@ -41,6 +69,48 @@ app.use(express.static(__dirname + '/private'));
 
 
 //rotas das funções
+// Rota para cadastrar um usuário
+app.post('/cadastro', async (req, res) => {
+  const connection = await db.connect();
+  const nome = req.body.nome;
+  const email = req.body.email;
+  const senha = req.body.senha;
+  const nomeUsuario = req.body.nomeUsuario;
+
+  // Verifica se todas as informações foram enviadas
+  if (!nome || !email || !senha || !nomeUsuario) {
+    return res.status(400).send('Por favor, preencha todos os campos');
+  }
+  // Verifica se o e-mail já foi cadastrado
+  db.query('SELECT * FROM usuarios WHERE email = ?', [email], (err, results) => {
+    if (err) {
+      return res.status(500).send('Erro ao verificar o e-mail no banco de dados');
+    }
+    if (results.length > 0) {
+      return res.status(400).send('O e-mail já foi cadastrado');
+    }
+
+    // Cria o hash da senha usando bcrypt
+    bcrypt.hash(senha, 10, (err, hash) => {
+      if (err) {
+        return res.status(500).send('Erro ao criptografar a senha');
+      }
+
+      // Insere o usuário no banco de dados
+      db.query(
+        'INSERT INTO usuarios (nome, email, senha, nome_usuario) VALUES (?, ?, ?, ?)',
+        [nome, email, hash, nomeUsuario],
+        (err, results) => {
+          if (err) {
+            return res.status(500).send('Erro ao cadastrar o usuário no banco de dados');
+          }
+          return res.status(200).send('Usuário cadastrado com sucesso');
+        }
+      );
+    });
+  });
+});
+
 //localizar item
 app.get('/inventario/:id', async (req, res) => {  
   try {

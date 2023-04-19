@@ -11,7 +11,6 @@ async function connect() {
             `mysql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_URL}/${process.env.DATABASE}`
         );
         return connection;
-        //oi
     }
 }
 
@@ -43,6 +42,7 @@ async function deleteInventario(id){
     const values = [id];
     return await conn.query(sql, values);
 }
+
 
 
 exports.connect = connect;
