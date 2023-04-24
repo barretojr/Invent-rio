@@ -25,6 +25,6 @@
   },
   "devDependencies": {
     "mysql": "^2.18.1",
-    "nodemon": "^2.0.21"
+    "nodemon": "^2.0.22"
   }
 }
