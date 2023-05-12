@@ -22,9 +22,3 @@ const sessionOptions = session({
     },
 });
 
-app.on('pronto', () => {
-    app.listen(8080, () => {
-        console.log('Acessar http://localhost:8080');
-        console.log('Servidor executando na porta 8080');
-    });
-});
