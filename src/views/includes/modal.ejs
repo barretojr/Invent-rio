@@ -1,0 +1,76 @@
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content bg-dark">
+            <div class="modal-header justify-content-center">
+                <h1 class="modal-title fs-5 text-center id=" editar-equipamento">Editar equipamento</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/items/<%= item.patrimonio %>" method="POST" id="modal-form"
+                    class="row g-3 needs-validation" id="editarItemModal" novalidate>
+                    <div class="row g-4 align-items-center mb-3">
+                        <div class="col-12 text-center row mt-4 justify-content-center">
+                            <label for="unidade" id="unidade" class="col-form-label">Unidade</label>
+                            <div class="col-6">
+                                <select name="unidade" id="unidade" class="form-select">
+                                    <option selected type="text">Selecione a unidade...
+                                    </option>
+                                    <option value="Piancó" <% if (item.unidade==="Piancó" ) { %>selected<% } %>>Piancó
+                                    </option>
+                                    <option value="Orfanato" <% if (item.unidade==="Orfanato" ) { %>selected<% } %>
+                                            >Orfanato</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="patrimonio" class="form-label text-center">Patrimônio</label>
+                        <input type="number" name="patrimonio" id="patrimonio" value="<%= item.patrimonio %> "
+                            class="form-control" placeholder="Patrimônio" disabled>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="descricao" class="form-label">Descrição</label>
+                        <input type="text" name="descricao" id="descricao" value="<%= item.descricao %>"
+                            class="form-control" placeholder="Descrição">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="usuario" class="form-label">Usuário</label>
+                        <input type="text" name="usuario" id="usuario" class="form-control"
+                            placeholder="Nome do usuário" value="<%= item.usuario %>">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="modelo" class="form-label">Modelo</label>
+                        <input type="text" name="modelo" id="modelo" class="form-control"
+                            placeholder="Modelo do equipamento" value="<%= item.modelo %>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="localizacao" class="form-label">Departamento</label>
+                        <input type="text" name="localizacao" id="localizacao" value="<%= item.departamento %>"
+                            class="form-control" placeholder="Departamento">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="valorestim" class="form-label">Valor da compra</label>
+                        <input type="text" name="valorestim" id="valorestim" value="<%= item.valorestim %>"
+                            class="form-control" placeholder="R$">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="nserie" class="form-label">Nº de série</label>
+                        <input type="text" name="nserie" id="nserie" class="form-control" value="<%= item.nserie %>">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="input-data" class="form-label">Data da compra</label>
+                        <input type="date" name="input-data" id="input-data" class="form-control"
+                            value="<%= item.formattedDataCompra %>">
+                    </div>
+                    <div class="col-12">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary"
+                            data-item-id="<%= item.patrimonio %>">Editar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
