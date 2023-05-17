@@ -1,14 +1,29 @@
-// Custom.scss
-// Option A: Include all of Bootstrap
-
-// Include any default variable overrides here (though functions won't be available)
-
-@import '../node_modules/bootstrap/scss/bootstrap';
-@import '../node_modules/bootstrap-icons/font/bootstrap-icons.css';
-
-// Then add additional custom code here
-
+/* Print Custom CSS*/
 @media print {
+    * {
+        background: transparent;
+        color: #000;
+        text-shadow: none;
+        filter: none;
+        -ms-filter: none;
+    }
+
+    .container,
+    .navbar,
+    #input-filter,
+    #filter-btn {
+        display: none;
+    }
+
+    th:last-child {
+        display: none;
+    }
+
+    th {
+        padding: 0 50px;
+        background-color: #fff;
+    }
+
     .table-dark {
         --bs-table-color: #000;
         --bs-table-bg: #f8f9fa;
@@ -22,4 +37,5 @@
         color: var(--bs-table-color);
         border-color: var(--bs-table-border-color);
     }
+
 }

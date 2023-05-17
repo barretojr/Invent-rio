@@ -1,4 +1,37 @@
+<footer class="container mt-5 text-center">
+    <hr class="row">
+    <p class="text-center">Assessoria Contábil e Fiscal São Judas &copy; 2023 Todos os direitos reservados </p>
+</footer>
+
+<%- include('modal') %>
     <script src="js/bootstrap.bundle.js"></script>
     <script src="js/scripts.js"></script>
-</body>
-</html>
+    <script src="js/switch.js"></script>
+    <script>
+
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            const forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+
+
+    </script>
+    </body>
+
+    </html>

@@ -116,5 +116,6 @@
     lightSwitch.addEventListener('change', onToggleMode);
     onToggleMode();
   }
+
   setup();
 })();
