@@ -14,3 +14,7 @@
 ## npx knex migrate:make nome_da_tabela
 
 ##------------------------------------------------------------------------------
+
+
+# Logo ter feito isso tudo rodar o projeto com 
+## nodemon server
