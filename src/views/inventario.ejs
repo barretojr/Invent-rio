@@ -1,0 +1,158 @@
+<%- include('includes/header.ejs') %>
+    <section class="container">
+        <h1 class="display-2 text-center">Inventário</h1>
+        <p class="lead text-center">Cadastro de equipamento</p>
+        <form class="row g-3 needs-validation" method="post" action="/add" novalidate>
+            <div class="row g-4 align-items-center mb-3">
+                <div class="col-12 text-center row mt-4 justify-content-center">
+                    <label for="input-unidade" id="inputUnidade" class="col-form-label">Unidade</label>
+                    <div class="col-6">
+                        <select required name="input-unidade" id="input-unidade" class="form-select">
+                            <option selected>Selecione a unidade...</option>
+                            <option value="Piancó">Piancó</option>
+                            <option value="Orfanato">Orfanato</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="input-patrimonio" class="form-label">Patrimônio</label>
+                <% if ('input-patrimonio' !=='Piancó' || 'input-patrimonio' !=='Orfanato' ) { %>
+                    <div class="invalid-feedback">
+                        Por favor, selecione uma unidade
+                    </div>
+                    <% } %>
+                        <input type="number" name="input-patrimonio" id="input-patrimonio" class="form-control"
+                            placeholder="Patrimônio" required>
+
+            </div>
+            <div class="col-md-6">
+                <label for="input-descricao" class="form-label">Descrição</label>
+                <input type="text" name="input-descricao" id="input-descricao" class="form-control"
+                    placeholder="Descrição" required>
+                <div class="invalid-feedback">
+                    Por favor, digite um valor
+                </div>
+            </div>
+            <div class="col-md-12">
+                <label for="input-usuario" class="form-label">Usuário</label>
+                <input type="text" name="input-usuario" id="input-usuario" class="form-control"
+                    placeholder="Nome do usuário" required>
+                <div class="invalid-feedback">
+                    Por favor, digite um valor
+                </div>
+            </div>
+            <div class="col-md-12">
+                <label for="input-modelo" class="form-label">Modelo</label>
+                <input type="text" name="input-modelo" id="input-modelo" class="form-control"
+                    placeholder="Modelo do equipamento" required>
+                <div class="invalid-feedback">
+                    Por favor, digite um valor
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="input-departamento" class="form-label">Departamento</label>
+                <input type="text" name="input-departamento" id="input-departamento" class="form-control"
+                    placeholder="Departamento" required>
+                <div class="invalid-feedback">
+                    Por favor, digite um valor
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="input-valor-compra" class="form-label">Valor da compra</label>
+                <input type="text" name="input-valor-compra" id="input-valor-compra" class="form-control"
+                    placeholder="R$" required>
+                <div class="invalid-feedback">
+                    Por favor, digite um valor
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="input-data" class="form-label">Data da compra</label>
+                <input type="date" name="input-data" id="input-data" class="form-control"
+                    placeholder="Digite a data de compra" value="" required>
+                <div class="invalid-feedback">
+                    Por favor, digite um valor
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="input-serie" class="form-label">Nº de série</label>
+                <input type="text" placeholder="Nº série" name="input-serie" id="input-serie" class="form-control"
+                    required>
+                <div class="invalid-feedback">
+                    Por favor, digite um valor
+                </div>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">
+                    Adicionar
+                </button>
+            </div>
+        </form>
+    </section>
+    <section class="container-fluid mt-5">
+        <div class="container mb-5 col-md-4 d-flex">
+            <input type="text" name="input-filter" id="input-filter" placeholder="Digite o Nº do patrimônio" required
+                class="form-control">
+            <a href="" target="_blank" class="btn btn-info ms-3" id="filter-btn">Pesquisar</a>
+            <div class="invalid-feedback">
+                Por favor, digite um valor
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover table-striped table-light" id="table">
+                <thead>
+                    <th scope="col">Patrimônio</th>
+                    <th scope="col">Unidade</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Usuário</th>
+                    <th scope="col">Modelo</th>
+                    <th scope="col">Departamento</th>
+                    <th scope="col">Valor da Compra</th>
+                    <th scope="col">Data da compra</th>
+                    <th scope="col">Nº de série</th>
+                    <th scope="col">Ações</th>
+                </thead>
+                <tbody class="table-group-divider" aria-label="Items table" data-page="0">
+                    <% listagem.forEach(element=> { %>
+                        <tr>
+                            <th>
+                                <%= element.patrimonio %>
+                            </th>
+                            <th>
+                                <%= element.unidade %>
+                            </th>
+                            <th>
+                                <%= element.descricao %>
+                            </th>
+                            <th>
+                                <%= element.usuario %>
+                            </th>
+                            <th>
+                                <%= element.modelo %>
+                            </th>
+                            <th>
+                                <%= element.localizacao %>
+                            </th>
+                            <th>
+                                R$ <%= element.valorestim %>
+                            </th>
+                            <th>
+                                <%= element.formattedDataCompra %>
+                            </th>
+                            <th>
+                                <%= element.nserie %>
+                            </th>
+                            <th><button type="button" class="btn btn-sm btn-warning" id="edit-item-btn"
+                                    data-bs-toggle="modal" data-bs-target="#editModal"
+                                    data-item-id="<%= element.patrimonio %>">
+                                    Editar
+                                </button>
+                                <a href="/delete/<%= element.patrimonio %>"
+                                    class="deletar btn btn-sm btn-danger">Excluir</a>
+                            </th>
+                        </tr>
+                        <% }); %>
+                </tbody>
+            </table>
+        </div>
+        <%- include('includes/footer.ejs') %>

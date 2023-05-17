@@ -1,0 +1,41 @@
+/* Print Custom CSS*/
+@media print {
+    * {
+        background: transparent;
+        color: #000;
+        text-shadow: none;
+        filter: none;
+        -ms-filter: none;
+    }
+
+    .container,
+    .navbar,
+    #input-filter,
+    #filter-btn {
+        display: none;
+    }
+
+    th:last-child {
+        display: none;
+    }
+
+    th {
+        padding: 0 50px;
+        background-color: #fff;
+    }
+
+    .table-dark {
+        --bs-table-color: #000;
+        --bs-table-bg: #f8f9fa;
+        --bs-table-border-color: #dfe0e1;
+        --bs-table-striped-bg: #ecedee;
+        --bs-table-striped-color: #000;
+        --bs-table-active-bg: #dfe0e1;
+        --bs-table-active-color: #000;
+        --bs-table-hover-bg: #e5e6e7;
+        --bs-table-hover-color: #000;
+        color: var(--bs-table-color);
+        border-color: var(--bs-table-border-color);
+    }
+
+}
