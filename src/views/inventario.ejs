@@ -93,7 +93,7 @@
         <div class="container mb-5 col-md-4 d-flex">
             <input type="text" name="input-filter" id="input-filter" placeholder="Digite o Nº do patrimônio" required
                 class="form-control">
-            <a href="" target="_blank" class="btn btn-info ms-3" id="filter-btn">Pesquisar</a>
+            <a href="/search/" target="_blank" class="btn btn-info ms-3" id="filter-btn">Pesquisar</a>
             <div class="invalid-feedback">
                 Por favor, digite um valor
             </div>
@@ -112,38 +112,38 @@
                     <th scope="col">Nº de série</th>
                     <th scope="col">Ações</th>
                 </thead>
-                <tbody class="table-group-divider" aria-label="Items table" data-page="0">
+                <tbody class="table-group-divider" id="tbody" aria-label="Items table" data-page="0">
                     <% listagem.forEach(element=> { %>
                         <tr>
-                            <th>
+                            <th class="col col-lg-1">
                                 <%= element.patrimonio %>
                             </th>
-                            <th>
+                            <th class="col col-lg-1">
                                 <%= element.unidade %>
                             </th>
-                            <th>
+                            <th class="col col-lg-1">
                                 <%= element.descricao %>
                             </th>
-                            <th>
+                            <th class="col col-lg-1">
                                 <%= element.usuario %>
                             </th>
-                            <th>
+                            <th class="col col-lg-1">
                                 <%= element.modelo %>
                             </th>
-                            <th>
+                            <th class="col col-lg-1">
                                 <%= element.localizacao %>
                             </th>
-                            <th>
+                            <th class="col col-lg-1">
                                 R$ <%= element.valorestim %>
                             </th>
-                            <th>
+                            <th class="col col-lg-2">
                                 <%= element.formattedDataCompra %>
                             </th>
-                            <th>
+                            <th class="col col-lg-1">
                                 <%= element.nserie %>
                             </th>
-                            <th><button type="button" class="btn btn-sm btn-warning" id="edit-item-btn"
-                                    data-bs-toggle="modal" data-bs-target="#editModal"
+                            <th class="col col-lg-2"><button type="button" class="btn btn-sm btn-warning"
+                                    id="edit-item-btn" data-bs-toggle="modal" data-bs-target="#editModal"
                                     data-item-id="<%= element.patrimonio %>">
                                     Editar
                                 </button>

@@ -1,6 +1,6 @@
 # Para rodar o projeto deve se ter o Nodejs instalado na maquina
 ## rodar os trechos de codigo no terminal:
-## pm i / npm install
+## npm i / npm install
 
 ##------------------------------------------------------------------------------
 

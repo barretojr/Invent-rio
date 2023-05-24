@@ -8,9 +8,9 @@ async function connect() {
             user: process.env.DB_USER,
             password: process.env.DB_PASSWORD,
             database: process.env.DATABASE,
-            connectionLimit: 10, // Configura o limite de conexões do pool
-            namedPlaceholders: true, // Habilita o uso de placeholders nomeados em queries
-            timezone: '-03:00' // Define o fuso horário padrão das datas para UTC
+            connectionLimit: 10, 
+            namedPlaceholders: true, 
+            timezone: '-03:00'
         });
         const connection = await connectionPool.getConnection();
         return connection
@@ -32,7 +32,7 @@ async function showInventory() {
                 const options = { year: 'numeric', month: '2-digit', day: '2-digit' }
                 row.formattedDataCompra = new Date(dateValue).toLocaleDateString('pt-BR', options);
             } else {
-                row.formattedDataCompra = 'Data de compra não disponível';
+                row.formattedDataCompra = 'Sem data';
             }
         })
         return rows;
@@ -45,59 +45,52 @@ async function showInventory() {
 }
 
 async function createITAsset(inventory) {
-    let conn;
+    let conn
     try {
-      conn = await connect();
-      const sql =
-        'INSERT INTO Inventario (unidade, descricao, modelo, localizacao, valorestim, usuario, nserie, data_compra, modificado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP);';
-      const values = [
-        inventory.unidade,
-        inventory.descricao,
-        inventory.modelo,
-        inventory.localizacao,
-        inventory.valorestim,
-        inventory.usuario,
-        inventory.nserie,
-        inventory.data_compra
-      ];
-      if (
-        !inventory.unidade ||
-        !inventory.descricao ||
-        !inventory.modelo ||
-        !inventory.localizacao ||
-        !inventory.valorestim ||
-        !inventory.usuario ||
-        !inventory.nserie ||
-        !inventory.data_compra
-      ) {
-        throw new Error('Dados inválidos');
-      }
-      return await conn.query(sql, values);
+        conn = await connect();
+        const sql =
+            'INSERT INTO Inventario (unidade, descricao, modelo, localizacao, valorestim, usuario, nserie, data_compra) VALUES(?, ?, ?, ?, ?, ?, ?, ?);';
+        const values = [
+            inventory.patrimonio,
+            inventory.unidade,
+            inventory.descricao,
+            inventory.modelo,
+            inventory.localizacao,
+            inventory.valorestim,
+            inventory.usuario,
+            inventory.nserie,
+            inventory.data_compra
+        ];
+        if (!inventory.patrimonio || !inventory.unidade || !inventory.descricao || !inventory.modelo || !inventory.localizacao || !inventory.valorestim || !inventory.usuario || !inventory.nserie || inventory.data_compra) {
+            throw new Error('Dados inválidos');
+        }
+        return await conn.query(sql, values);
     } catch (error) {
-      console.error('Erro ao registrar item no banco de dados', error);
-      throw error;
+        console.error('Erro ao registrar item no banco de dados', error)
+        throw error;
     }
-  }
-  
-
-
+}
 
 async function editAsset(id, inventory) {
-    const conn = await connect();
-    const sql =
-        'UPDATE Inventario SET unidade=?, descricao=?, modelo=?, localizacao=?, valorestim=?, usuario=?, nserie=?, data_compra WHERE patrimonio=?;    ';
-    const values = [
-        inventory.unidade,
-        inventory.descricao,
-        inventory.modelo,
-        inventory.localizacao,
-        inventory.valorestim,
-        inventory.usuario,
-        inventory.nserie,
-        inventory.data_compra,
-        id,
-    ];
-    return await conn.query(sql, values);
+    try {
+        const conn = await connect();
+        const sql =
+            'UPDATE Inventario SET unidade=?, descricao=?, modelo=?, localizacao=?, valorestim=?, usuario=?, nserie=?, data_compra=? WHERE patrimonio=?;    ';
+        const values = [
+            inventory.unidade,
+            inventory.descricao,
+            inventory.modelo,
+            inventory.localizacao,
+            inventory.valorestim,
+            inventory.usuario,
+            inventory.nserie,
+            id,
+        ];
+        return await conn.query(sql, values);
+    } catch (error) {
+        console.error('Erro ao editar itens no banco de dados', error)
+        throw error;
+    }
 }
 
 async function deleteAsset(id) {
